@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  app:
+    image: php:7.3-fpm-alpine3.11
+    container_name: app
+    ports:
+      - '8080:8080'
+    networks:
+      private_network:
+        ipv4_address: 172.16.231.10
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+    command: "php -S 0.0.0.0:8080 -t public"
+  database:
+    image: mysql:5.7
+    container_name: database
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: "homestead"
+      MYSQL_USERNAME: "homestead"
+      MYSQL_ROOT_PASSWORD: "secret"
+    ports:
+      - '3306:3306'
+    networks:
+      private_network:
+        ipv4_address: 172.16.231.11
+networks:
+  private_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: 'false'
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.231.0/24
