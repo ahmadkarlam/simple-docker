@@ -12,6 +12,11 @@ docker run --publish 8080:8080 [--detach] --name app simple-docker:v1
 ```
 use `--detach` for run container on background
 
+Running `php artisan`:
+```
+docker exec (container_name/container_id) php artisan [...]
+```
+
 ## Using docker-compose.yml
 Run docker-compose.yml:
 ```
@@ -27,4 +32,9 @@ docker-compose stop
 Remove container (removing containers, network, image and volume):
 ```
 docker-compose down
+```
+
+Running `php artisan`:
+```
+docker-compose exec app php artisan [...]
 ```

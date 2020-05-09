@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Post;
 use App\User;
 use Faker\Generator as Faker;
 
@@ -20,5 +21,13 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+    ];
+});
+
+$factory->define(Post::class, function (Faker $faker) {
+    return [
+        "title" => $faker->words(3, true),
+        "body" => $faker->paragraphs(3, true),
+        "author_name" => $faker->name,
     ];
 });

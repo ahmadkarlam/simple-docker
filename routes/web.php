@@ -1,5 +1,7 @@
 <?php
 
+/** @var $router \Laravel\Lumen\Routing\Router */
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +14,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version() . ": (". gethostname() .")";
+    $posts = \App\Post::paginate(50);
+    return [
+        "posts" => $posts,
+    ];
 });
